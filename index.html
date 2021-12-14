@@ -210,23 +210,46 @@
       function create(){
         let strings = "";
         let array = [];
-        if(document.getElementById("uppercase").checked){
+        
+        const uppercase_flg = document.getElementById("uppercase").checked;
+        const lowercase_flg = document.getElementById("lowercase").checked;
+        const num_flg = document.getElementById("num").checked;
+        const hyphen_flg = document.getElementById("hyphen").checked;
+        const underscore_flg = document.getElementById("underscore").checked;
+        const symbol_flg = document.getElementById("symbol").checked;
+        if(uppercase_flg){
           strings += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         }
-        if(document.getElementById("lowercase").checked){
+        if(lowercase_flg){
           strings += "abcdefghijklmnopqrstuvwxyz";
         }
-        if(document.getElementById("num").checked){
+        if(num_flg){
           strings += "0123456789";
         }
-        if(document.getElementById("hyphen").checked){
+        if(hyphen_flg){
           strings += "-";
         }
-        if(document.getElementById("underscore").checked){
+        if(underscore_flg){
           strings += "_";
         }
-        if(document.getElementById("symbol").checked){
+        if(symbol_flg){
           strings += "/*+.,!#$%&()~|@";
+        }
+        // 文字列に何もチェックがない場合
+        if(!uppercase_flg && !lowercase_flg && !num_flg && !hyphen_flg && !underscore_flg && !symbol_flg){
+          alert('文字列を最低一つ選択してください。');
+          return;
+        }
+        // 文字列に何もチェックがない場合
+        if(!uppercase_flg && !lowercase_flg && !num_flg && !symbol_flg){
+          if(!hyphen_flg && underscore_flg){
+            alert('アンダースコア選択時はもう一つ文字列を選択してください。');
+            return;
+          }
+          if(hyphen_flg && !underscore_flg){
+            alert('ハイフン選択時はもう一つ文字列を選択してください。');
+            return;
+          }
         }
         array = strings.split('');
         shuffled_array = fisherYatesShuffle(array);
