@@ -339,17 +339,19 @@
           !underscore_flg &&
           !symbol_flg
         ) {
-          alert("文字列を最低一つ選択してください。");
+          Swal.fire("文字列を最低一つ選択してください。");
           return;
         }
         // 文字列に何もチェックがない場合
         if (!uppercase_flg && !lowercase_flg && !num_flg && !symbol_flg) {
           if (!hyphen_flg && underscore_flg) {
-            alert("アンダースコア選択時はもう一つ文字列を選択してください。");
+            Swal.fire(
+              "アンダースコア選択時はもう一つ文字列を選択してください。"
+            );
             return;
           }
           if (hyphen_flg && !underscore_flg) {
-            alert("ハイフン選択時はもう一つ文字列を選択してください。");
+            Swal.fire("ハイフン選択時はもう一つ文字列を選択してください。");
             return;
           }
         }
@@ -413,12 +415,28 @@
         }
       }
 
+      async function copyToClipboard(text) {
+        try {
+          await navigator.clipboard.writeText(text);
+          Swal.fire("コピーしました");
+        } catch (error) {
+          Swal.fire("コピーに失敗しました");
+        }
+      }
+
       // リセットボタンクリック
       const reset_btn = document.getElementById("reset_btn");
       reset_btn.addEventListener("click", reset);
       // 作成ボタンクリック
       const create_btn = document.getElementById("create_btn");
       create_btn.addEventListener("click", create);
+      // パスワードクリック
+      const pass = document.getElementsByClassName("heading tag rounded");
+      for (let i = 0; i < pass.length; i++) {
+        pass[i].addEventListener("click", function () {
+          copyToClipboard(this.textContent);
+        });
+      }
     </script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script
@@ -426,5 +444,7 @@
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
       crossorigin="anonymous"
     ></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
