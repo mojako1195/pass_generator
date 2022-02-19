@@ -30,3 +30,12 @@ body {
 .swal2-styled.swal2-confirm {
   background-color: #0d6efd !important;
 }
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler:active {
+  outline: none;
+}
+button:focus {
+  outline: none;
+}
